@@ -25,7 +25,12 @@ public class ExpenseServiceImpl implements ExpenseService{
         Optional<Expense> expense = expenseRepo.findById(id);
         if(expense.isPresent()) {
             return expense.get();
-        } 
+        }
         throw new RuntimeException("not found for " + id);
+    }
+
+    @Override
+    public void deleteExpenseById(Long id) {
+        expenseRepo.deleteById(id);
     }
 }
