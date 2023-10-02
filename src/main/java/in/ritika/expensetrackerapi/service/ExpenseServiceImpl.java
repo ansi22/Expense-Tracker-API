@@ -3,12 +3,12 @@ package in.ritika.expensetrackerapi.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import in.ritika.expensetrackerapi.entity.Expense;
+import in.ritika.expensetrackerapi.exceptions.ResourceNotFoundException;
 import in.ritika.expensetrackerapi.repository.ExpenseRepository;
 
 @Service
@@ -29,7 +29,7 @@ public class ExpenseServiceImpl implements ExpenseService{
         if(expense.isPresent()) {
             return expense.get();
         }
-        throw new RuntimeException("not found for " + id);
+        throw new ResourceNotFoundException("Expense not found for " + id);
     }
 
     @Override
@@ -53,7 +53,4 @@ public class ExpenseServiceImpl implements ExpenseService{
 
         return expenseRepo.save(existingExpense);
     }
-
-
-   
 }
