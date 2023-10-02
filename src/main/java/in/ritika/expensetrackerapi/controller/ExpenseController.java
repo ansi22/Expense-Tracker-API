@@ -3,7 +3,10 @@ package in.ritika.expensetrackerapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.ritika.expensetrackerapi.entity.Expense;
@@ -18,5 +21,15 @@ public class ExpenseController {
     @GetMapping("/expenses")
     public List<Expense> getAllExpenses() {
         return expenseService.getAllExpenses();
+    }
+
+    @GetMapping("/expenses/{id}")
+    public Expense getExpenseById(@PathVariable("id") Long id) {
+        return expenseService.getExpenseById(id);
+    }
+
+    @DeleteMapping("/expenses")
+    public String deleteExpenseById(@RequestParam("id") Long id) {
+        return "The expense is deleted with id "+ id;
     }
 }
