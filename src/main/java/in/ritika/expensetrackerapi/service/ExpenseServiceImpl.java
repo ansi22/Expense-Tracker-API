@@ -1,9 +1,11 @@
 package in.ritika.expensetrackerapi.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import in.ritika.expensetrackerapi.entity.Expense;
@@ -15,9 +17,10 @@ public class ExpenseServiceImpl implements ExpenseService{
     @Autowired
     private ExpenseRepository expenseRepo;
 
+
     @Override
-    public List<Expense> getAllExpenses() {
-        return expenseRepo.findAll();
+    public Page<Expense> getAllExpenses(Pageable page) {
+        return expenseRepo.findAll(page);
     }
 
     @Override
@@ -51,4 +54,6 @@ public class ExpenseServiceImpl implements ExpenseService{
         return expenseRepo.save(existingExpense);
     }
 
+
+   
 }
