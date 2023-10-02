@@ -1,7 +1,11 @@
 package in.ritika.expensetrackerapi.entity;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,5 +37,14 @@ public class Expense {
     private BigDecimal amount;
     
     private String category;
+
     private Date date;
+
+    @Column(name="created_at", nullable=false, updatable=false)
+    @CreationTimestamp
+    private Timestamp createdAt;
+
+    @Column(name="updated_at")
+    @UpdateTimestamp
+    private Timestamp updatedAt;
 }
