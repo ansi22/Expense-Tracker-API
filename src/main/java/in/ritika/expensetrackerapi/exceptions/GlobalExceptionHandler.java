@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import in.ritika.expensetrackerapi.entity.ErrorObject;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorObject> handleExceptionNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         ErrorObject errorObject = new ErrorObject();
@@ -52,5 +53,26 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // @Override
+	// protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+	// 		HttpHeaders headers, HttpStatus status, WebRequest request) {
+		
+	// 	Map<String, Object> body = new HashMap<String, Object>();
+		
+	// 	body.put("statusCode", HttpStatus.BAD_REQUEST.value());
+		
+	// 	List<String> errors = ex.getBindingResult()
+	// 		.getFieldErrors()
+	// 		.stream()
+	// 		.map(x -> x.getDefaultMessage())
+	// 		.collect(Collectors.toList());
+		
+	// 	body.put("messages", errors);
+		
+	// 	body.put("timestamp", new Date());
+		
+	// 	return new ResponseEntity<Object>(body, HttpStatus.BAD_REQUEST);
+		
+	// }
 
 }

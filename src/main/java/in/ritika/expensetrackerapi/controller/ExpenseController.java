@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.ritika.expensetrackerapi.entity.Expense;
 import in.ritika.expensetrackerapi.service.ExpenseService;
+import jakarta.validation.Valid;
 
 @RestController
 public class ExpenseController {
@@ -44,7 +45,7 @@ public class ExpenseController {
 
     @ResponseStatus(value=HttpStatus.CREATED)
     @PostMapping("/expenses")
-    public Expense saveExpenseDetails(@RequestBody Expense expense) {
+    public Expense saveExpenseDetails(@Valid @RequestBody Expense expense) {
         return expenseService.saveExpenseDetails(expense);
     }
 
